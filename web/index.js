@@ -25,7 +25,7 @@ const phoneRGEX = /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/;
 const emailRGEX = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
 let csvStream = fastcsv
-  .parse({ headers: [ 'id', 'firstName', 'lastName','phone','email' ], renameHeaders: true, trim:true})
+  .parse({ headers: [ 'id', 'firstName', 'lastName','phone','email' ], renameHeaders: true, trim: true, ignoreEmpty: true })
   .validate((row, cb) => {
         const isValidemployeeId = employeeIdRGEX.test(row.id);
         const isValidPhoneNumber = phoneRGEX.test(row.phone);
