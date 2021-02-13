@@ -1,9 +1,9 @@
-const fs = require("fs");
-const pool = require("./db")
-const fastcsv = require("fast-csv");
+const fs = require('fs');
+const pool = require('./db')
+const fastcsv = require('fast-csv');
 const createCsvWriter = require('csv-writer').createObjectCsvWriter;
-const _ = require("lodash");
-const moment = require("moment")
+const _ = require('lodash');
+const moment = require('moment')
 
 const csvWriter = createCsvWriter({
   path: `${process.argv[3]}`,
@@ -20,9 +20,9 @@ const csvWriter = createCsvWriter({
 let stream = fs.createReadStream(`${process.argv[2]}`);
 let csvData = [];
 let outData = [];
-let employeeIdRGEX = /^[a-zA-Z][0-9]{6,}$/;
-let phoneRGEX = /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/;
-let emailRGEX = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+const employeeIdRGEX = /^[a-zA-Z][0-9]{6,}$/;
+const phoneRGEX = /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/;
+const emailRGEX = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
 let csvStream = fastcsv
   .parse({ headers: [ 'id', 'firstName', 'lastName','phone','email' ], renameHeaders: true, trim:true})
@@ -40,7 +40,7 @@ let csvStream = fastcsv
         return cb(null, true);
   })
   .on('error', error => console.error(error))
-  .on("data", function(data) {
+  .on('data', data => {
     csvData.push([data.id,data.firstName,data.lastName,data.phone,data.email]);
 
     let outputData = Object.assign(
@@ -52,8 +52,8 @@ let csvStream = fastcsv
     outData.push(outputData);
   })
   .on('data-invalid', (row, rowNumber, reason) => console.log(`Invalid [rowNumber=${rowNumber}] [reason=${reason}]`))
-  .on("end", function() {
-     let query = "INSERT INTO employee (employeeId, first_name, last_name, phone, email) VALUES ?";
+  .on('end', ()=> {
+     let query = 'INSERT INTO employee (employeeId, first_name, last_name, phone, email) VALUES ?';
      pool.query(query, [csvData], (error, response) => {
        if (error) console.log(error);
        else {
@@ -61,6 +61,7 @@ let csvStream = fastcsv
           csvWriter.writeRecords(outData)
             .then(() => {
               console.log(console.log('The CSV file was written successfully'));
+              process.exit(0);
           });
        }
     })
