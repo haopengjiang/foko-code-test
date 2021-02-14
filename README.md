@@ -8,7 +8,7 @@ It is built for code test of fokoRetail.
 * Library to parse CSV file - [fast-csv](https://c2fo.github.io/fast-csv/docs/introduction/getting-started/)
 * Library to write CSV file - [csv-writer](https://www.npmjs.com/package/csv-writer)
 * Validation - [fast-csv library ](https://c2fo.github.io/fast-csv/docs/parsing/examples#validation)
-* Testing - [Mocha](https://mochajs.org/)
+* Testing - [Mocha](https://mochajs.org/) [Chai](http://www.chaijs.com/)
 * Code Style - [Prettier](https://prettier.io/)
 
 
