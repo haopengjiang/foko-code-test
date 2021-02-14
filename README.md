@@ -13,13 +13,14 @@ It is built for code test of fokoRetail.
 
 
 ## Installation & Run
-* open terminal cd to \foko-code-challeng
+* open terminal git clone https://github.com/haopengjiang/foko-code-test.git
+* cd to \foko-code-test
 * *docker-compose up -d* (compose and run, it creates the mysql database)
-* cd to \foko-code-challeng\solution
+* cd to \foko-code-test\solution
 * *npm install* - Install dependencies
 * *npm start* - Start application
 * *docker-compose down* (Destroy application and mysql containers)
 
 ## Test
-* cd to \foko-code-challeng\solution
+* cd to \foko-code-test\solution
 * *npm run test* - Run all test cases
