@@ -45,19 +45,17 @@ const generateResult = ()=> {
 
   // save data to db
   const query = "INSERT INTO employee (employeeId, first_name, last_name, phone, email) VALUES ?";
-   pool.query(query, [csvData], (error, response) => {
-     if (error) console.log(error);
-     else {
-       console.log(
-         `Imported into ${response.affectedRows} records into mysql`
-       );
-       // write data to output csv file
-       csvWriter.writeRecords(outData).then(() => {
-         console.log(console.log("The CSV file was written successfully"));
-         process.exit(0);
-       });
-     }
-   });
+    pool.query(query, [csvData], (error, response) => {
+      if (error) console.log(error);
+      else { 
+        console.log( `Imported into ${response.affectedRows} records into mysql`);
+        // write data to output csv file
+        csvWriter.writeRecords(outData).then(() => {
+          console.log(console.log("The CSV file was written successfully"));
+          process.exit(0);
+        });
+      }
+    });
 };
 
 module.exports = {

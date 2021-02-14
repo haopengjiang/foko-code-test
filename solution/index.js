@@ -1,9 +1,10 @@
 const fs = require("fs");
-const validateData = require("./validator");
 const fastcsv = require("fast-csv");
+const validateData = require("./validator");
 const { processData, generateResult } = require("./dataService")
 
 const stream = fs.createReadStream(`${process.argv[2]}`);
+
 const options = {
   headers: ["id", "firstName", "lastName", "phone", "email"],
   renameHeaders: true,
